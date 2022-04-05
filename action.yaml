@@ -1,0 +1,9 @@
+name: 'Trybe Serverless Deploy'
+author: 'Trybe'
+description: 'Action utilizada para realizar deploy de aplicações serverless na Trybe.'
+runs:
+  using: 'composite'
+  steps:
+    - id: job
+      shell: bash
+      run: ${{ github.action_path }}/deploy.sh
