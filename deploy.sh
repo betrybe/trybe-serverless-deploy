@@ -18,6 +18,6 @@ npm i -g serverless@3.x
 
 serverless deploy      \
   --verbose            \
-  --region $region     \
+  --region $AWS_REGION \
   --stage $ENVIRONMENT \
   $secrets_list
