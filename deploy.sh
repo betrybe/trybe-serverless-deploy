@@ -17,8 +17,10 @@ export COMPANY="trybe"
 
 npm i -g serverless@3.x
 
-serverless deploy      \
+bash -c " \
+  serverless deploy    \
   --verbose            \
   --region $AWS_REGION \
   --stage $ENVIRONMENT \
   $secrets_list        \
+"
