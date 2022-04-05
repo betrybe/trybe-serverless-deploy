@@ -8,9 +8,8 @@ secrets_list=""
 for data in ${secrets}
 do
   name=$(echo $data | sed 's/'^SECRET_'//g')
-  secrets_list="$secrets_list --param \"$name=\${$data}\""
+  secrets_list="$secrets_list --param $name=\${$data}"
 done
-
 
 export AWS_REGION="us-east-2"
 export DEPLOYMENT_BUCKET="trybe-common-s3-serverless-deployments"
