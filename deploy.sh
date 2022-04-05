@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set +x
+
 # Preparing the secret variables defined using the prefix "SECRET_".
 secrets=$(env | awk -F = '/^SECRET_/ {print $1}')
 secrets_list=""
