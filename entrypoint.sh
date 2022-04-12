@@ -1,8 +1,7 @@
 #!/bin/bash
-set -x
 
 # Build section
-wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O yq && chmod +x yq && mv yq /usr/bin/yq
+#wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O yq && chmod +x yq && mv yq /usr/bin/yq
 npm i -g serverless@3.12.0
 
 # Preparing the secret variables defined using the prefix "SECRET_".
