@@ -1,11 +1,10 @@
 # Trybe Serverless Deploy
-Action utilizada para realizar deploy de aplicações serverless na Trybe.
+Action utilizada para realizar deploy, rollback ou remover aplicações serverless na Trybe.
 
 ## Entradas
-> Esta action não possui **nenhum** input.
-> 
-> Todas as entradas desta action são obtidas através de **variáveis de ambiente**. Desta maneira, a manutenção desta action fica simplificada ao utilizar sempre a versão mapeada com a branch principal.
+* **environment** - Tipo de ambiente que a função será lançada.
+* **settings** - Segredo contendo todas as configurações necessárias para realizar o deploy serverless nos ambientes da Trybe.
+* **command** - Ação à ser realizada por esta action.
 
 ### Configurações disponíveis
-* **SECRET_\<nome-do-secret\>** - Qualquer variável de ambiente com o prefixo **SECRET_** será incluído como variável de ambiente dentro do ambiente serverless.
-* **ENVIRONMENT** - Ambiente no qual este código será entregue. As opções são: `[staging, homologation e production]`.
+* **SECRET_\<nome-do-secret\>** - Qualquer variável de ambiente com o prefixo **SECRET_** será incluído como **parâmetro** na hora da execução do framework serverless.

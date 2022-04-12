@@ -1,8 +1,6 @@
 #!/bin/bash
-set -x
 
 # Build section
-#wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O yq && chmod +x yq && mv yq /usr/bin/yq
 npm install -g serverless@3.12.0 &>/dev/null
 
 # Preparing the secret variables defined using the prefix "SECRET_".
@@ -48,9 +46,9 @@ echo "::group::Final 'serverless.yml' File"
 cat serverless.yml
 echo "::endgroup::"
 
-echo "::group::Deploy using serverless framework..."
+echo "::group::Executing '$COMMAND' using serverless framework..."
 bash -c " \
-  serverless deploy    \
+  serverless $COMMAND  \
   --verbose            \
   --stage $ENVIRONMENT \
   $parameters_list     \

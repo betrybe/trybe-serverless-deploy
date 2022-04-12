@@ -1,13 +1,16 @@
 name: 'Trybe Serverless Deploy'
 author: 'Trybe'
-description: 'Action utilizada para realizar deploy de aplicações serverless na Trybe.'
+description: 'Action utilizada para voltar a versão de uma aplicação serverless na Trybe.'
 inputs:
   environment:
     description: 'Environment no qual esta função serverless será deployada.'
     required: true
   settings:
     description: 'Configurações em YAML sobre como configurar este deploy, codificado em base64.'
-    required: true
+    required: false
+  command:
+    description: 'Comando à ser executado.'
+    default: deploy
 runs:
   using: 'composite'
   steps:
@@ -17,5 +20,4 @@ runs:
       env:
         ENVIRONMENT: ${{ inputs.environment }}
         SERVERLESS_SETTINGS: ${{ inputs.settings }}
-#  using: 'docker'
-#  image: 'docker://betrybe/trybe-serverless-deploy:latest'
+        COMMAND: ${{ inputs.command }}
