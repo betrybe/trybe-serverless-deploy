@@ -48,7 +48,7 @@ echo "::group::Final 'serverless.yml' File"
 cat serverless.yml
 echo "::endgroup::"
 
-echo "::group::Executing '$COMMAND' using serverless framework..."
+echo "Executing '$COMMAND' using serverless framework..."
 bash -c " \
   serverless $COMMAND  \
   --verbose            \
@@ -56,5 +56,4 @@ bash -c " \
   $parameters_list     \
   $secrets_list        \
 "
-echo "::endgroup::"
 echo "Done!"
