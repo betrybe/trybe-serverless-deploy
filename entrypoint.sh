@@ -13,6 +13,7 @@ do
 done
 
 # Reading custom variables from the secret
+SERVERLESS_SETTINGS=${SERVERLESS_SETTINGS_OVERRIDE:-$SERVERLESS_SETTINGS}
 echo $SERVERLESS_SETTINGS | base64 -d > settings.yml
 
 echo "::group::Final 'settings.yml' File"
