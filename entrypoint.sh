@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Build section
 npm install -g serverless@3.12.0 &>/dev/null

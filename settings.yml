@@ -1,0 +1,8 @@
+awsRegion: "us-east-2"
+deploymentBucket: "trybe-common-s3-serverless-deployments"
+executionRoleArn: "arn:aws:iam::992764703785:role/trybe-staging-lambda-execution-role"
+logDestinationArn: "arn:aws:es:us-east-2:992764703785:domain/trybe"
+rabbitMQArn: "arn:aws:mq:us-east-2:992764703785:broker:trybe-staging-rabbitmq-broker:b-96995479-1544-494f-b8fc-331933b686ee"
+rabbitMQCredentialsArn: "arn:aws:secretsmanager:us-east-2:992764703785:secret:trybe-staging-secret-for-rabbitmq-9wK98O"
+subnetIds: "subnet-01b39f50afac85075,subnet-0cd961290d6ee84bb"
+securityGroupIds: "sg-0c439d2bcd5fc1f48"

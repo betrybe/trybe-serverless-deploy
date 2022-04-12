@@ -1,4 +1,5 @@
 staging.yaml
 production.yaml
+serverless.yml
 .serverless/*
 bin/*
