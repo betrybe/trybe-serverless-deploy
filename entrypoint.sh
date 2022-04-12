@@ -33,7 +33,8 @@ do
 done
 
 # Merge template and app yaml files
-yq eval-all '. as $item ireduce ({}; . * $item )' template.yaml app.yaml > /tmp/a.yaml
+cp $GITHUB_ACTION_PATH/template.yaml .
+yq eval-all '. as $item ireduce ({}; . * $item )' template.yaml serverless.yaml > /tmp/a.yaml
 
 # Force log retention value
 yq e '(.functions[]) .logRetentionInDays |= 7' /tmp/a.yaml > /tmp/b.yaml
