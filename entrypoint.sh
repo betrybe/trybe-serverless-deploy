@@ -1,8 +1,9 @@
 #!/bin/bash
+set -x
 
 # Build section
 #wget https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64 -O yq && chmod +x yq && mv yq /usr/bin/yq
-npm i -g serverless@3.12.0
+npm install -g serverless@3.12.0 &>/dev/null
 
 # Preparing the secret variables defined using the prefix "SECRET_".
 secrets=$(env | awk -F = '/^SECRET_/ {print $1}')
@@ -14,37 +15,37 @@ do
 done
 
 # Reading custom variables from the secret
-echo $SERVERLESS_SETTINGS | base64 -d > settings.yaml
+echo $SERVERLESS_SETTINGS | base64 -d > settings.yml
 
-echo "::group::Final 'settings.yaml' File"
-cat settings.yaml
+echo "::group::Final 'settings.yml' File"
+cat settings.yml
 echo "::endgroup::"
 
 # Allow the loop below to work properly.
 IFS='
 '
 
-# Transforming settings.yaml variables to parameters
-keys=($(yq e 'keys | .[]' settings.yaml))
-values=($(yq e '.[]' settings.yaml))
+# Transforming settings.yml variables to parameters
+keys=($(yq e 'keys | .[]' settings.yml))
+values=($(yq e '.[]' settings.yml))
 for index in ${!keys[*]}
 do
   parameters_list="$parameters_list --param \"${keys[$index]}=${values[$index]}\""
 done
 
-# Merge template and app yaml files
-cp $GITHUB_ACTION_PATH/template.yaml .
-yq eval-all '. as $item ireduce ({}; . * $item )' template.yaml serverless.yaml > /tmp/a.yaml
+# Merge template and app yml files
+cp $GITHUB_ACTION_PATH/template.yml .
+yq eval-all '. as $item ireduce ({}; . * $item )' template.yml serverless.yml > /tmp/a.yml
 
 # Force log retention value
-yq e '(.functions[]) .logRetentionInDays |= 7' /tmp/a.yaml > /tmp/b.yaml
+yq e '(.functions[]) .logRetentionInDays |= 7' /tmp/a.yml > /tmp/b.yml
 
 # Handle RabbitMQ ARN and credentials, if needed.
-yq e '(.functions[].events[] | select(. | has("activemq"))) .activemq.arn = "${param:rabbitMQArn}"' /tmp/b.yaml > /tmp/a.yaml
-yq e '(.functions[].events[] | select(. | has("activemq"))) .activemq.basicAuthArn = "${param:rabbitMQCredentialsArn}"' /tmp/a.yaml > serverless.yaml
+yq e '(.functions[].events[] | select(. | has("activemq"))) .activemq.arn = "${param:rabbitMQArn}"' /tmp/b.yml > /tmp/a.yml
+yq e '(.functions[].events[] | select(. | has("activemq"))) .activemq.basicAuthArn = "${param:rabbitMQCredentialsArn}"' /tmp/a.yml > serverless.yml
 
-echo "::group::Final 'serverless.yaml' File"
-cat serverless.yaml
+echo "::group::Final 'serverless.yml' File"
+cat serverless.yml
 echo "::endgroup::"
 
 echo "::group::Deploy using serverless framework..."
