@@ -1,0 +1,4 @@
+staging.yaml
+production.yaml
+.serverless/*
+bin/*

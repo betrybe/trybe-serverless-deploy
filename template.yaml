@@ -1,0 +1,31 @@
+custom:
+  fullName: trybe-${sls:stage}-${self:service}
+  logSubscription:
+    enabled: true
+    roleArn: ${param:executionRoleArn}
+    destinationArn: ${param:logDestinationArn}
+  defaultTags:
+    Name: ${self:service}
+    Environment: ${sls:stage}
+    CostCenter: "Tecnologia"
+    Squad: "Plataforma"
+
+provider:
+  stackName: ${self:custom.fullName}
+  tags: ${self:custom.defaultTags}
+  stackTags: ${self:custom.defaultTags}
+  region: ${param:awsRegion}
+  deploymentBucket:
+    name: ${param:deploymentBucket}
+    maxPreviousDeploymentArtifacts: 3
+  iam:
+    role: ${param:executionRoleArn}
+  vpc:
+    securityGroupIds:
+      "Fn::Split":
+        - ","
+        - ${param:securityGroupIds}
+    subnetIds:
+      "Fn::Split":
+        - ","
+        - ${param:subnetIds}
