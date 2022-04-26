@@ -1,6 +1,11 @@
 #!/bin/bash
 set -e
 
+# Go the the repository path
+if [[ "$REPOSITORY_PATH" != "" ]]; then
+  cd $REPOSITORY_PATH
+fi
+
 # Build section
 npm install -g serverless@3.12.0 &>/dev/null
 
