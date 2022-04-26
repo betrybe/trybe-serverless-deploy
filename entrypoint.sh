@@ -46,8 +46,8 @@ yq eval-all '. as $item ireduce ({}; . * $item )' template.yml serverless.yml > 
 yq e '(.functions[]) .logRetentionInDays |= 7' /tmp/a.yml > /tmp/b.yml
 
 # Handle RabbitMQ ARN and credentials, if needed.
-yq e '(.functions[].events[] | select(. | has("activemq"))) .activemq.arn = "${param:rabbitMQArn}"' /tmp/b.yml > /tmp/a.yml
-yq e '(.functions[].events[] | select(. | has("activemq"))) .activemq.basicAuthArn = "${param:rabbitMQCredentialsArn}"' /tmp/a.yml > serverless.yml
+yq e '(.functions[].events[] | select(. | has("rabbitmq"))) .rabbitmq.arn = "${param:rabbitMQArn}"' /tmp/b.yml > /tmp/a.yml
+yq e '(.functions[].events[] | select(. | has("rabbitmq"))) .rabbitmq.basicAuthArn = "${param:rabbitMQCredentialsArn}"' /tmp/a.yml > serverless.yml
 
 echo "::group::Final 'serverless.yml' File"
 cat serverless.yml
